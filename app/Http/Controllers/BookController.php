@@ -7,6 +7,15 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+
+    //serch function
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $books = Book::where('title', 'like', '%'.$search.'%')->paginate(5);
+        return view('books.index', ['books' => $books]);
+        
+    }
     /**
      * Display a listing of the resource.
      */
@@ -104,6 +113,8 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('success', 'Book Deleted Successfully!');
     }
+
+
 
     public function getPDF()
     {

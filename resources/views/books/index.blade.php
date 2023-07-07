@@ -1,13 +1,22 @@
-
-
 @extends('layout.layout')
-
-
 
 @section('content')
 
 <a href="{{ route('books.create') }}" class="btn btn-primary mb-3 float-left" style="margin-bottom: 6px">Add Book</a>
-<a href="{{route('get-pdf')}}" class="btn btn-primary mb-3 float-right">Download PDF</a>
+<a href="{{ route('get-pdf') }}" class="btn btn-primary mb-3 float-right">Download PDF</a>
+
+<input type="text" class="form-control mb-3" id="search" name="search" placeholder="Search Book" style="width: 200px; float: right; margin-right: 6px; margin-bottom: 6px">
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#search").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+      });
+    });
+  });
+</script>
 
 <table class="table table-hover mt-6">
   <thead>
@@ -20,7 +29,7 @@
       <th scope="col">Price</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="myTable">
     @foreach($books as $book)
     <tr>
       <th scope="row">{{ $book->id }}</th>
@@ -43,6 +52,3 @@
 </table>
 {{ $books->links() }}
 @endsection
-
-
-
