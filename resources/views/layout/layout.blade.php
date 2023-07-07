@@ -16,6 +16,19 @@
 
     </head>
     <body class="container ">
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+        @elseif(session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+        @endif
+        
+        <div class="mt-5" style="margin-top: 30px">
+            <h1 class="text-center">Book Store</h1>
+        </div>
         <div class="mt-30" style="margin-top: 30px">
             @yield('content')
         </div>

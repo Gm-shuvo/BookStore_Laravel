@@ -43,7 +43,7 @@ Route::get(
     'App\Http\Controllers\BookController@edit'
 )->name('books.edit');
 
-Route::put(
+Route::PUT(
     '/books/{book}',
     'App\Http\Controllers\BookController@update'
 )->name('books.update');

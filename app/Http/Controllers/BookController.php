@@ -66,8 +66,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        // 
-
+    
+        return view('books.edit', ['book' => $book]);
     }
 
     /**
@@ -75,7 +75,23 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'isbn' => 'required',
+            'price' => 'required',
+            'publisher' => 'required',
+        ]);
+
+        $book->title = $request->title;
+        $book->author = $request->author;
+        $book->isbn = $request->isbn;
+        $book->price = $request->price;
+        $book->publisher = $request->publisher;
+
+        $book->update();
+        
+        return redirect()->route('books.index')->with('success', 'Book Updated Successfully!');
     }
 
     /**
@@ -83,6 +99,9 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        //delete the book
+        $book->delete();
+
+        return redirect()->route('books.index')->with('success', 'Book Deleted Successfully!');
     }
 }
