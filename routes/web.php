@@ -53,3 +53,6 @@ Route::delete(
     'App\Http\Controllers\BookController@destroy'
 )->name('books.destroy');
 
+Route::get('/get-pdf' , 'App\Http\Controllers\BookController@getPDF')->name('get-pdf');
+
+

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Bookstore</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,7 +25,7 @@
             {{ session()->get('error') }}
         </div>
         @endif
-        
+
         <div class="mt-5" style="margin-top: 30px">
             <h1 class="text-center">Book Store</h1>
         </div>

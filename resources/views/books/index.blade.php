@@ -6,7 +6,8 @@
 
 @section('content')
 
-<a href="{{ route('books.create') }}" class="btn btn-primary mb-3" style="margin-bottom: 6px">Add Book</a>
+<a href="{{ route('books.create') }}" class="btn btn-primary mb-3 float-left" style="margin-bottom: 6px">Add Book</a>
+<a href="{{route('get-pdf')}}" class="btn btn-primary mb-3 float-right">Download PDF</a>
 
 <table class="table table-hover mt-6">
   <thead>

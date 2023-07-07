@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Dompdf\Dompdf;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -104,4 +104,52 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('success', 'Book Deleted Successfully!');
     }
+
+    public function getPDF()
+    {
+        // Retrieve all books from the database
+        $books = Book::all();
+        
+        // Create a new Dompdf instance
+        $pdf = new Dompdf();
+        
+        // Define the HTML content for the PDF
+        $html = '<h1>Books List</h1>
+            <table class= "table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>ISBN</th>
+                        <th>Price</th>
+                        <th>Publisher</th>
+                    </tr>
+                </thead>
+                <tbody>';
+        
+        // Loop through each book and add its details to the HTML
+        foreach ($books as $book) {
+            $html .= '<tr>
+                <td>' . $book->title . '</td>
+                <td>' . $book->author . '</td>
+                <td>' . $book->isbn . '</td>
+                <td>' . $book->price . '</td>
+                <td>' . $book->publisher . '</td>
+            </tr>';
+        }
+        
+        $html .= '</tbody></table>';
+        
+        // Load the HTML into Dompdf
+        $pdf->loadHtml($html);
+        
+        // Set paper size and orientation
+        $pdf->setPaper('A4', 'landscape');
+        
+        // Render the HTML as PDF
+        $pdf->render();
+        
+        // Output the generated PDF to the browser
+        $pdf->stream('books.pdf', ["Attachment" => false]);
+    }    
 }
