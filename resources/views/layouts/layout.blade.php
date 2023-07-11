@@ -6,6 +6,7 @@
 
         <title>Bookstore</title>
 
+        @notifyCss
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -17,6 +18,8 @@
     <body class="antialiased mt-3">
        <div class="container mt-3 ">
         @yield('content')
+        <x-notify::notify />
+        @notifyJs
        </div>
     </body>
 </html>

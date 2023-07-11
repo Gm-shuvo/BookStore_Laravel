@@ -50,7 +50,8 @@ class BookController extends Controller
         $book->isbn = $request->isbn;
 
         $book->save();
-        return redirect()->route('books.index')->with('success', 'Book successfully added.');
+        notify()->success('Book successfully added.');
+        return redirect()->route('books.index');
     }
 
     /**
@@ -89,7 +90,8 @@ class BookController extends Controller
         $book->isbn = $request->isbn;
 
         $book->update();
-        return redirect()->route('books.index')->with('success', 'Book successfully added.');
+        notify()->success('Book successfully updated.');
+        return redirect()->route('books.index');
     }
 
     /**
@@ -98,7 +100,8 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect()->route('books.index')->with('success', 'Book successfully deleted.');
+        notify()->success('Book successfully deleted.');
+        return redirect()->route('books.index');
     }
 
     //get pdf
